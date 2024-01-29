@@ -8,6 +8,7 @@ app =firebase_admin.initialize_app(dbcofig)
 db=firestore.client(app)
 
 User=db.collection('Profile')
+import json
 
 
 class database():
@@ -15,11 +16,15 @@ class database():
         profile=User.add(data)
         print('document uploaded suceessfully')
 
+   
     def profile_search():
-        profile=User.document.get().to_dict()
-        print(profile)
-        return profile
-
+        data=User.stream()
+        user=[]
+        for i in data:
+            user_data=i.to_dict()
+            user.append(user_data)
+        
+        return user
 
 
 

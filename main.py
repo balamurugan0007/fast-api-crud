@@ -40,10 +40,10 @@ def createuser(data:user):
     return data
 
 
-@app.get('/user')
+@app.get("/user")
 
-def userdetail():
-    data=database.profile_search()
-    print(data)
-    return data
+def search_user():
+    data= jsonable_encoder(database.profile_search())
+
+    return {"detail":data}
 
